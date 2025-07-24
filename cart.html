@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6 text-center text-blue-600">🛒 Your Cart</h1>
+
+<!-- Back button aligned to the right -->
+<div class="flex justify-end items-center mb-6">
+  <a href="index.html" class="max-w-xl ml-auto bg-green-600 hover:bg-green-700 text-white px-4 py-1 p-6 rounded shadow">Back</a>
+</div>
+
+  <!-- Cart items -->
+  <div id="cart-items" class="max-w-xl ml-auto bg-white p-6 rounded shadow">
+    <!-- Cart items will appear here -->
+  </div>
+
+  <!-- Next button -->
+  <div class="max-w-xl mx-auto mt-10 text-center">
+    <a href="personalinfo.html" class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded shadow">
+      Choose address at next step
+    </a>
+  </div>
+</div>
+
+  <script>
+    const products = [
+      { id: 1, name: "Sprouts", price: 50 },
+      { id: 2, name: "Tea", price: 15 },
+      { id: 3, name: "Buttermilk", price: 15 },
+      { id: 4, name: "Fruity", price: 15 }
+    ];
+
+    function getCart() {
+      return JSON.parse(localStorage.getItem("cart")) || {};
+    }
+
+    function renderCart() {
+      const cart = getCart();
+      const container = document.getElementById("cart-items");
+      container.innerHTML = "";
+
+      const selectedItems = products.filter(product => cart[product.id]);
+
+      if (selectedItems.length === 0) {
+        container.innerHTML = "<p class='text-gray-500'>Your cart is empty.</p>";
+        return;
+      }
+
+      let total = 0;
+
+      selectedItems.forEach(product => {
+        const qty = cart[product.id];
+        const subtotal = product.price * qty;
+        total += subtotal;
+
+        const div = document.createElement("div");
+        div.className = "flex justify-between items-center border-b py-2";
+        div.innerHTML = `
+          <div>
+            <h2 class="text-lg font-semibold">${product.name}</h2>
+            <p class="text-gray-500">₹${product.price} × ${qty}</p>
+          </div>
+          <div class="font-bold text-right">₹${subtotal}</div>
+        `;
+        container.appendChild(div);
+      });
+
+      const totalDiv = document.createElement("div");
+      totalDiv.className = "text-right font-bold mt-4 text-xl";
+      totalDiv.innerText = `Total: ₹${total}`;
+      container.appendChild(totalDiv);
+    }
+
+    document.addEventListener("DOMContentLoaded", renderCart);
+  </script>
+</body>
+</html>
