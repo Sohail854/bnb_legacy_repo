@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BNB Products</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center text-blue-600">🍴 BNB - Breakfast N Break</h1>
+
+    <div class="max-w-xl mx-auto mt-10 px-4">
+      <h1 class="text-2xl font-semibold mb-4">Available Items</h1>
+      <div id="product-list" class="flex flex-col gap-4">
+        <!-- Products will be rendered here -->
+      </div>
+
+      <!-- Go to Cart Button -->
+      <div id="goToCartWrapper" class="mt-6 text-center hidden">
+        <a href="cart.html" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded shadow">
+          Go to Cart
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const products = [
+      { id: 1, name: "Sprouts", price: 50 },
+      { id: 2, name: "Tea", price: 15 },
+      { id: 3, name: "Buttermilk", price: 15 },
+      { id: 4, name: "Fruity", price: 15 }
+    ];
+
+    function getCart() {
+      return JSON.parse(localStorage.getItem("cart")) || {};
+    }
+
+    function setCart(cart) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    function renderProducts() {
+      const container = document.getElementById("product-list");
+      container.innerHTML = "";
+
+      const cart = getCart();
+
+      products.forEach(product => {
+        const qty = cart[product.id] || 0;
+
+        const div = document.createElement("div");
+        div.className = "bg-white p-4 rounded shadow flex justify-between items-center";
+
+        div.innerHTML = `
+          <div>
+            <h2 class="text-lg font-semibold">${product.name}</h2>
+            <p class="text-gray-500">₹${product.price}</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button class="bg-red-500 text-white px-3 py-1 rounded" data-action="decrease" data-id="${product.id}">-</button>
+            <span id="qty-${product.id}" class="min-w-[20px] text-center">${qty}</span>
+            <button class="bg-green-500 text-white px-3 py-1 rounded" data-action="increase" data-id="${product.id}">+</button>
+          </div>
+        `;
+
+        container.appendChild(div);
+      });
+
+      attachListeners();
+    }
+
+    function attachListeners() {
+      document.querySelectorAll("[data-action]").forEach(button => {
+        button.addEventListener("click", () => {
+          const id = button.getAttribute("data-id");
+          const action = button.getAttribute("data-action");
+          updateCart(parseInt(id), action);
+        });
+      });
+    }
+
+    function updateCart(id, action) {
+      const cart = getCart();
+
+      if (action === "increase") {
+        cart[id] = (cart[id] || 0) + 1;
+      } else if (action === "decrease") {
+        if (cart[id] > 1) {
+          cart[id] -= 1;
+        } else {
+          delete cart[id];
+        }
+      }
+
+      setCart(cart);
+      renderProducts();
+      toggleCartButton();
+    }
+
+    function toggleCartButton() {
+      const cart = getCart();
+      const hasItems = Object.values(cart).some(qty => qty > 0);
+      const button = document.getElementById("goToCartWrapper");
+
+      if (hasItems) {
+        button.classList.remove("hidden");
+      } else {
+        button.classList.add("hidden");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderProducts();
+      toggleCartButton();
+    });
+  </script>
+</body>
+</html>

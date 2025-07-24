@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personal Info + Address</title>
+  <script defer src="script.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-lg">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-semibold">Team & Ground Details</h2>
+      <a href="cart.html" class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded shadow">Back</a>
+    </div>
+
+    <div id="cartSummary" class="mb-4 text-sm text-gray-700 font-medium">
+    <!-- JS will populate cart summary here -->
+  </div>
+
+    <form id="infoForm" class="space-y-4">
+      <div>
+        <label for="fullName" class="block mb-1 font-medium">Full Name</label>
+        <input type="text" id="fullName" required class="w-full border border-gray-300 rounded p-2">
+      </div>
+      <div>
+        <label for="teamName" class="block mb-1 font-medium">Team Name</label>
+        <input type="text" id="teamName" required class="w-full border border-gray-300 rounded p-2">
+      </div>
+      <div>
+        <label for="phoneNumber" class="block mb-1 font-medium">Phone Number</label>
+        <input type="text" id="phoneNumber" required class="w-full border border-gray-300 rounded p-2">
+      </div>
+      <div>
+        <label for="groundName" class="block mb-1 font-medium">Ground Name</label>
+        <input type="text" id="groundName" required class="w-full border border-gray-300 rounded p-2">
+      </div>
+      <div>
+        <label for="slot" class="block mb-1 font-medium">Select Slot</label>
+        <select id="slot" required class="w-full border border-gray-300 rounded p-2">
+          <option value=""> Select a Slot </option>
+          <option value="6:30 - 9:30">6:30 - 9:30</option>
+          <option value="9:30 - 12:30">9:30 - 12:30</option>
+        </select>
+      </div>
+      <div>
+        <label for="orderTime" class="block mb-1 font-medium">Order Needed At (Time)</label>
+        <input type="time" id="orderTime" required class="w-full border border-gray-300 rounded p-2">
+      </div>
+      <div>
+        <label for="orderDate" class="block mb-1 font-medium">Order Needed On</label>
+        <input type="date" id="orderDate" required class="w-full border border-gray-300 rounded p-2">
+      </div>
+
+      <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow transition">
+        Place Order
+      </button>
+    </form>
+  </div>
+</body>
+</html>
