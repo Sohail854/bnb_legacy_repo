@@ -6,34 +6,46 @@
   <title>Your Cart</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 min-h-screen">
-  <div class="container mx-auto px-4 py-8">
-  <h1 class="text-3xl font-bold mb-6 text-center text-blue-600">🛒 Your Cart</h1>
+<body class="bg-cyan-50 text-cyan-900 font-sans">
+  <!-- Header -->
+  <header class="bg-white shadow-md py-4 px-6">
+    <div class="container mx-auto px-4 py-4">
+    <h1 class="text-4xl font-bold text-center text-grey-800">🛒 Your Cart</h1>
+    </div>
+  </header>
 
-<!-- Back button aligned to the right -->
-<div class="flex justify-end items-center mb-6">
-  <a href="index.html" class="max-w-xl ml-auto bg-green-600 hover:bg-green-700 text-white px-4 py-1 p-6 rounded shadow">Back</a>
-</div>
+   <!-- Main content -->
+  <main class="container mx-auto px-4 py-8">
 
-  <!-- Cart items -->
-  <div id="cart-items" class="max-w-xl mx-auto bg-white p-6 rounded shadow">
-    <!-- Cart items will appear here -->
-  </div>
+    <!-- Back button -->
+    <div class="flex justify-end mb-6">
+      <a href="index.html" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded shadow-2xl">
+        Back
+      </a>
+    </div>
 
-  <!-- Next button -->
-  <div class="max-w-xl mx-auto mt-10 text-center">
-    <a href="PersonalInfo.html" class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded shadow">
-      Choose address at next step
-    </a>
-  </div>
-</div>
+    <!-- Cart items -->
+    <div id="cart-items" class="max-w-xl mx-auto bg-white p-6 rounded shadow-2xl">
+      <!-- Cart items will appear here -->
+    </div>
+
+    <!-- Next button -->
+    <div class="max-w-xl mx-auto mt-10 text-center">
+      <a href="PersonalInfo.html" class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded shadow-2xl">
+        Choose address at next step
+      </a>
+    </div>
+
+  </main>
 
   <script>
     const products = [
       { id: 1, name: "Sprouts", price: 50 },
       { id: 2, name: "Tea", price: 15 },
       { id: 3, name: "Buttermilk", price: 15 },
-      { id: 4, name: "Fruity", price: 15 }
+      { id: 4, name: "Fruity", price: 15 },
+      { id: 5, name: "Fruit Chat", price: 60 },
+      { id: 6, name: "Peanut chat", price: 65 }
     ];
 
     function getCart() {

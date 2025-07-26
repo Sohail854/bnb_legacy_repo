@@ -3,20 +3,42 @@ document.addEventListener("DOMContentLoaded", function () {
     1: "Sprouts",
     2: "Tea",
     3: "Buttermilk",
-    4: "Fruity"
+    4: "Fruity",
+    5: "Fruit Chat",
+    6: "Peanut chat"
     // Add more as needed
   };
+
+  // 🛒 Update cart count
+  //document.addEventListener("DOMContentLoaded", function () {
+  const cart = JSON.parse(localStorage.getItem("cart")) || {};
+  const countSpan = document.getElementById("cartCount");
+
+  if (countSpan && cart && typeof cart === "object") {
+    let totalItems = 0;
+
+    // If cart is stored as { "4": 2, "5": 1 } (itemId: quantity)
+    for (let itemId in cart) {
+      totalItems += cart[itemId];
+    }
+
+    if (totalItems > 0) {
+      countSpan.textContent = totalItems;
+      countSpan.classList.remove("hidden");
+    } else {
+      countSpan.classList.add("hidden");
+    }
+  }
+
 
   // 🚀 Handle form submission
   document.getElementById("infoForm").addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const fullName = document.getElementById("fullName").value.trim();
     const teamName = document.getElementById("teamName").value.trim();
     const phoneNumber = document.getElementById("phoneNumber").value.trim();
     const groundName = document.getElementById("groundName").value.trim();
     const slot = document.getElementById("slot").value;
-    const orderTime = document.getElementById("orderTime").value;
     const orderDate = document.getElementById("orderDate").value;
 
     // 📞 Basic phone number validation
@@ -44,12 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
       .join(", ");
 
     const formData = {
-      fullName,
       teamName,
       phoneNumber,
       groundName,
       slot,
-      orderTime,
       orderDate,
       cartDetails
     };
