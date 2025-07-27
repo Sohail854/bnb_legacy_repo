@@ -5,7 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     3: "Buttermilk",
     4: "Fruity",
     5: "Fruit Chat",
-    6: "Peanut chat"
+    6: "Peanut chat",
+    7: "Fuel Box",
+    8: "Boiled Egg"
     // Add more as needed
   };
 
